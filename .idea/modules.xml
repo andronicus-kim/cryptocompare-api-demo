@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CryptoAsus.iml" filepath="$PROJECT_DIR$/CryptoAsus.iml" />
       <module fileurl="file://E:\SampleApps\cryptocompare-api-demo\CryptoAsus.iml" filepath="E:\SampleApps\cryptocompare-api-demo\CryptoAsus.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://E:\SampleApps\cryptocompare-api-demo\app\app.iml" filepath="E:\SampleApps\cryptocompare-api-demo\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cryptocompare-api-demo.iml" filepath="$PROJECT_DIR$/cryptocompare-api-demo.iml" />
+      <module fileurl="file://E:\Sampleprojects\CryptoAsus\cryptocompare-api-demo.iml" filepath="E:\Sampleprojects\CryptoAsus\cryptocompare-api-demo.iml" />
     </modules>
   </component>
 </project>
