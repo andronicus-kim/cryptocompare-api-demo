@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              xmlns:app="http://schemas.android.com/apk/res-auto"
-             tools:context="kim.andronicus.cryptoasus.MainActivityFragment">
+             tools:context="kim.andronicus.cryptoasus.create_cards.CreateCardsFragment">
 
    <ImageView
        android:layout_width="50dp"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         app:fabSize="normal"
         android:src="@drawable/add_icon"
-        android:layout_gravity="bottom||right"
+        android:layout_gravity="bottom|right"
         android:layout_marginRight="@dimen/dp16"
         android:layout_marginBottom="@dimen/dp16"/>
 </FrameLayout>

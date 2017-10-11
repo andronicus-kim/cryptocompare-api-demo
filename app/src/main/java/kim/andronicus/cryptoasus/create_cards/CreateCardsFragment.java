@@ -1,4 +1,4 @@
-package kim.andronicus.cryptoasus;
+package kim.andronicus.cryptoasus.create_cards;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import kim.andronicus.cryptoasus.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainActivityFragment extends Fragment {
+public class CreateCardsFragment extends Fragment {
 
 
-    public MainActivityFragment() {
+    public CreateCardsFragment() {
         // Required empty public constructor
     }
 
