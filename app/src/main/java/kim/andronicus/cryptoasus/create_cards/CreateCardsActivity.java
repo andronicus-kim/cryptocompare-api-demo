@@ -1,9 +1,11 @@
-package kim.andronicus.cryptoasus;
+package kim.andronicus.cryptoasus.create_cards;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import kim.andronicus.cryptoasus.R;
+
+public class CreateCardsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
