@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/Japan"
+          android:title="Japanese Yen"/>
+    <item android:id="@+id/China"
+        android:title="Chinese Yuan Renminbi"/>
+    <item android:id="@+id/Nigeria"
+          android:title="Naira"/>
+    <item android:id="@+id/India"
+          android:title="India Rupees"/>
+    <item android:id="@+id/Singapore"
+          android:title="Singapore Dollar"/>
+    <item android:id="@+id/Taiwan"
+          android:title="Taiwan Dollar"/>
+    <item android:id="@+id/US"
+          android:title="USD"/>
+    <item android:id="@+id/Australia"
+          android:title="Australian Dollar"/>
+    <item android:id="@+id/Europe"
+          android:title="Euro"/>
+    <item android:id="@+id/Great_Britain"
+          android:title="GBP"/>
+    <item android:id="@+id/Russia"
+          android:title="Russian Ruble"/>
+    <item android:id="@+id/South_Africa"
+          android:title="South African Rand"/>
+    <item android:id="@+id/Mexico"
+          android:title="Mexican Peso"/>
+    <item android:id="@+id/Israel"
+          android:title="Israeli New Shekel"/>
+    <item android:id="@+id/Malaysia"
+          android:title="Malaysia Ringgit"/>
+    <item android:id="@+id/New_Zealand"
+          android:title="New Zealand Dollar"/>
+    <item android:id="@+id/Sweden"
+          android:title="Swedish Krona"/>
+    <item android:id="@+id/Switzerland"
+          android:title="Swiss Franc"/>
+    <item android:id="@+id/Norway"
+          android:title="Norwegian Krone"/>
+    <item android:id="@+id/Brazil"
+          android:title="Brazilian Real"/>
+    <item android:id="@+id/Turkey"
+          android:title="Turkish Lira"/>
+</menu>
