@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:text="Create Some Cards!"
+        android:text="Create CryptoCurrency Cards!"
         android:textSize="20sp"/>
 
     <android.support.design.widget.FloatingActionButton
