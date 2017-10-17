@@ -44,7 +44,68 @@ public class CreateCardsFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
+                            case R.id.Japan:
+                                createCard("JPY");
+                                break;
+                            case R.id.China:
+                                createCard("CNY");
+                                break;
+                            case R.id.Nigeria:
+                                createCard("NGN");
+                                break;
+                            case R.id.India:
+                                createCard("INR");
+                                break;
+                            case R.id.Singapore:
+                                createCard("SGD");
+                                break;
+                            case R.id.Taiwan:
+                                createCard("TWD");
+                                break;
+                            case R.id.US:
+                                createCard("USD");
+                                break;
                             case R.id.Australia:
+                                createCard("AUD");
+                                break;
+                            case R.id.Europe:
+                                createCard("EUR");
+                                break;
+                            case R.id.Great_Britain:
+                                createCard("GBP");
+                                break;
+                            case R.id.Russia:
+                                createCard("RUB");
+                                break;
+                            case R.id.South_Africa:
+                                createCard("ZAR");
+                                break;
+                            case R.id.Mexico:
+                                createCard("MXN");
+                                break;
+                            case R.id.Israel:
+                                createCard("ILS");
+                                break;
+                            case R.id.Malaysia:
+                                createCard("MYR");
+                                break;
+                            case R.id.New_Zealand:
+                                createCard("NZD");
+                                break;
+                            case R.id.Sweden:
+                                createCard("SEK");
+                                break;
+                            case R.id.Switzerland:
+                                createCard("CHF");
+                                break;
+                            case R.id.Norway:
+                                createCard("NOK");
+                                break;
+                            case R.id.Brazil:
+                                createCard("BRL");
+                                break;
+                            case R.id.Turkey:
+                                createCard("TRY");
                                 break;
                         }
                         return true;
@@ -55,8 +116,8 @@ public class CreateCardsFragment extends Fragment {
         });
         return view;
     }
-    private void createCard(String nomination){
-        startActivity(CardsActivity.newIntent(getActivity()));
+    private void createCard(String code){
+        startActivity(CardsActivity.newIntent(getActivity(),code));
     }
 
 }
