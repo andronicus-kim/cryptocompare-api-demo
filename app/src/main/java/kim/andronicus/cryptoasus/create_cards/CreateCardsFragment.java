@@ -43,16 +43,20 @@ public class CreateCardsFragment extends Fragment {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        if (menuItem.getItemId() == R.id.US){
-                            startActivity(CardsActivity.newIntent(getActivity()));
+                        switch (menuItem.getItemId()){
+                            case R.id.Australia:
+                                break;
                         }
-                        return false;
+                        return true;
                     }
                 });
 
             }
         });
         return view;
+    }
+    private void createCard(String nomination){
+        startActivity(CardsActivity.newIntent(getActivity()));
     }
 
 }
