@@ -1,5 +1,7 @@
 package kim.andronicus.cryptoasus.data.source.remote;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import kim.andronicus.cryptoasus.data.models.Card;
@@ -17,7 +19,7 @@ import retrofit2.Retrofit;
 
 public class CryptodataRemoteDataSource implements CryptodataDataSource{
 
-    private static final String TAG = "RemoteDataSource";
+    private static final String TAG = CryptodataRemoteDataSource.class.getSimpleName();
 
     @Inject
     CryptodataRemoteDataSource(){}
@@ -32,7 +34,7 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
         call.enqueue(new Callback<CryptodataResponse>() {
             @Override
             public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
-
+                Log.d(TAG, "onResponse: " + response.body().getUSD());
             }
 
             @Override

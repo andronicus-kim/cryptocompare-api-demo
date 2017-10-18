@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="kim.andronicus.cryptoasus">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".appconfig.MainApplication"
         android:allowBackup="true"
