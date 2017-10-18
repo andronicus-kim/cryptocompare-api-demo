@@ -12,6 +12,9 @@ import retrofit2.http.Query;
 public interface CryptodataAPIService {
 
     @GET("price")
-    Call<CryptodataResponse> getExchangeRate(@Query("fsym") String fCode,
-                                             @Query("tsyms") String tCode);
+    Call<CryptodataResponse> getBTCExchangeRate(@Query("fsym") String fCode,
+                                                @Query("tsyms") String tCode);
+    @GET("price")
+    Call<CryptodataResponse> getETHExchangeRate(@Query("fsym") String fCode,
+                                                @Query("tsyms") String tCode);
 }

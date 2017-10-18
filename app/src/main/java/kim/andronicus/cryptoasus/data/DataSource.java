@@ -8,6 +8,10 @@ public interface DataSource<T,E,T1> {
 
     void getAll(T1 callback);
 
+    void getBTC(T1 callback,String code);
+
+    void getETH(T1 callback, String code);
+
     void getOne(E id);
 
     void save(T item);

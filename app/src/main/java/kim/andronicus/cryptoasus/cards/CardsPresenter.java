@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import kim.andronicus.cryptoasus.data.models.Card;
 import kim.andronicus.cryptoasus.data.source.CryptodataDataSource;
 import kim.andronicus.cryptoasus.data.source.CryptodataRepository;
 
@@ -42,16 +41,31 @@ public class CardsPresenter implements CardsContract.Presenter{
 
     @Override
     public void createCard(String code) {
-        mRepository.getAll(new CryptodataDataSource.loadCardsCallback() {
+
+        //Get BTC Exchange rate
+        mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
-            public void onCryptodataLoaded(Card card) {
-                mView.showCardCreated();
+            public void onCryptodataLoaded(String message) {
+
             }
 
             @Override
             public void onDataNotAvailable() {
 
             }
-        });
+        },code);
+
+        //Get ETH Exchange rate
+        mRepository.getETH(new CryptodataDataSource.loadCardsCallback() {
+            @Override
+            public void onCryptodataLoaded(String message) {
+
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        },code);
     }
 }

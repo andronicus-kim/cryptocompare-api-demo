@@ -12,11 +12,9 @@ import kim.andronicus.cryptoasus.appconfig.MainApplication;
 import kim.andronicus.cryptoasus.util.ActivityUtils;
 
 public class CardsActivity extends AppCompatActivity {
-    private static final String CURRENCY_CODE = "CURRENCY_CODE";
 
-    public static Intent newIntent(Context context,String code){
+    public static Intent newIntent(Context context){
         Intent intent = new Intent(context, CardsActivity.class);
-        intent.putExtra(CURRENCY_CODE,code);
         return intent;
     }
     @Inject
@@ -29,7 +27,7 @@ public class CardsActivity extends AppCompatActivity {
 
         CardsFragment fragment = (CardsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null){
-            fragment = CardsFragment.newInstance(getIntent().getStringExtra(CURRENCY_CODE));
+            fragment = CardsFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     R.id.fragment_container,fragment);
         }

@@ -11,7 +11,7 @@ public interface CryptodataDataSource extends DataSource<Card,String,CryptodataD
 
     interface loadCardsCallback{
 
-        void onCryptodataLoaded(Card card);
+        void onCryptodataLoaded(String message);
 
         void onDataNotAvailable();
 

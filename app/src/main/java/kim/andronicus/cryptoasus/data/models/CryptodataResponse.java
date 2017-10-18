@@ -5,15 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class CryptodataResponse {
 
-    @SerializedName("USD")
-    private Double mUSD;
+    @SerializedName("CNY")
+    private Double mCNY;
 
-    public Double getUSD() {
-        return mUSD;
+    public Double getCNY() {
+        return mCNY;
     }
 
-    public void setUSD(Double USD) {
-        mUSD = USD;
+    public void setCNY(Double CNY) {
+        mCNY = CNY;
     }
-
 }

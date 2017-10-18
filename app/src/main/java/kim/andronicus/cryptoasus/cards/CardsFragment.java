@@ -2,7 +2,6 @@ package kim.andronicus.cryptoasus.cards;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -20,12 +19,7 @@ import kim.andronicus.cryptoasus.R;
  * A simple {@link Fragment} subclass.
  */
 public class CardsFragment extends Fragment implements CardsContract.View {
-
-    private static final String CURRENCY_CODE = "CURRENCY_CODE";
-
     private static final String TAG = "CardsFragment";
-
-    private String mCurrencyCode;
 
     private CardsContract.Presenter mPresenter;
 
@@ -35,22 +29,14 @@ public class CardsFragment extends Fragment implements CardsContract.View {
     * This method is used to instantiate the CardsFragment
     * */
 
-    public static CardsFragment newInstance(String code) {
+    public static CardsFragment newInstance() {
 
         Bundle args = new Bundle();
-        args.putString(CURRENCY_CODE,code);
 
         CardsFragment fragment = new CardsFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        mCurrencyCode = getArguments().getString(CURRENCY_CODE);
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,12 +129,11 @@ public class CardsFragment extends Fragment implements CardsContract.View {
     }
 
     private void createCard(String code) {
-
+        mPresenter.createCard(code);
     }
 
     @Override
     public void onResume() {
-        mPresenter.createCard(mCurrencyCode);
         super.onResume();
     }
 

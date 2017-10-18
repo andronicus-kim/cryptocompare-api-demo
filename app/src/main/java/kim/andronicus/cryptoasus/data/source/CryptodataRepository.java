@@ -27,6 +27,16 @@ public class CryptodataRepository implements CryptodataDataSource{
     }
 
     @Override
+    public void getBTC(loadCardsCallback callback,String code) {
+        mRemoteDataSource.getBTC(callback,code);
+    }
+
+    @Override
+    public void getETH(loadCardsCallback callback, String code) {
+        mRemoteDataSource.getETH(callback,code);
+    }
+
+    @Override
     public void getOne(String id) {
 
     }

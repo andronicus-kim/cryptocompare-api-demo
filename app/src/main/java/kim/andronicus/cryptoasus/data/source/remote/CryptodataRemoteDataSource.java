@@ -28,13 +28,21 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
     Retrofit mRetrofit;
 
     @Override
-    public void getAll(loadCardsCallback callback) {
+    public void getAll(final loadCardsCallback callback) {
 
-        Call<CryptodataResponse> call = mRetrofit.create(CryptodataAPIService.class).getExchangeRate("BTC","USD");
-        call.enqueue(new Callback<CryptodataResponse>() {
+    }
+
+    @Override
+    public void getBTC(final loadCardsCallback callback,String code) {
+        /*
+        * This client makes an api call to query BTC exchange rate against the currency given
+        * */
+        Call<CryptodataResponse> callBTC = mRetrofit.create(CryptodataAPIService.class).getBTCExchangeRate("BTC",code);
+        callBTC.enqueue(new Callback<CryptodataResponse>() {
             @Override
             public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
-                Log.d(TAG, "onResponse: " + response.body().getUSD());
+                Log.d(TAG, "onResponse: " + response.body().getCNY());
+                callback.onCryptodataLoaded("loaded");
             }
 
             @Override
@@ -42,7 +50,27 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
 
             }
         });
+    }
 
+    @Override
+    public void getETH(final loadCardsCallback callback, String code) {
+         /*
+        * This client makes an api call to query ETH exchange rate against the currency given
+        * */
+
+        Call<CryptodataResponse> callETH = mRetrofit.create(CryptodataAPIService.class).getETHExchangeRate("ETH",code);
+        callETH.enqueue(new Callback<CryptodataResponse>() {
+            @Override
+            public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
+                Log.d(TAG, "onResponse: " + response.body().getCNY());
+                callback.onCryptodataLoaded("loaded");
+            }
+
+            @Override
+            public void onFailure(Call<CryptodataResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
