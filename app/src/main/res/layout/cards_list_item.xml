@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
@@ -32,13 +33,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/iv_bt_currency_icon"
+                <TextView
+                    android:id="@+id/tv_btc_currency"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/dollar_sign"/>
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    tools:text="USD"/>
                 <TextView
-                    android:layout_toRightOf="@id/iv_bt_currency_icon"
+                    android:layout_toRightOf="@id/tv_btc_currency"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="489.01"
@@ -46,14 +49,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:layout_below="@id/iv_bt_currency_icon"
+                    android:layout_below="@id/tv_btc_currency"
                     android:id="@+id/iv_bt_percentage_icon"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
                     android:src="@drawable/drop_icon"/>
                 <TextView
                     android:layout_marginTop="5dp"
-                    android:layout_below="@id/iv_bt_currency_icon"
+                    android:layout_below="@id/tv_btc_currency"
                     android:layout_toRightOf="@id/iv_bt_percentage_icon"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -80,13 +83,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/dp16"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/iv_eth_currency_icon"
+                <TextView
+                    android:id="@+id/tv_eth_currency"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/dollar_sign"/>
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    tools:text="USD"/>
                 <TextView
-                    android:layout_toRightOf="@id/iv_eth_currency_icon"
+                    android:layout_toRightOf="@id/tv_eth_currency"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="489.01"
@@ -94,14 +99,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:layout_below="@id/iv_eth_currency_icon"
+                    android:layout_below="@id/tv_eth_currency"
                     android:id="@+id/iv_eth_percentage_icon"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
                     android:src="@drawable/rise_icon"/>
                 <TextView
                     android:layout_marginTop="5dp"
-                    android:layout_below="@id/iv_eth_currency_icon"
+                    android:layout_below="@id/tv_eth_currency"
                     android:layout_toRightOf="@id/iv_eth_percentage_icon"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="10dp"
