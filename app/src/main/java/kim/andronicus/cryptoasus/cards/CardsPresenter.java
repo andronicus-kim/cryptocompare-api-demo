@@ -2,7 +2,7 @@ package kim.andronicus.cryptoasus.cards;
 
 import android.support.annotation.NonNull;
 
-import kim.andronicus.cryptoasus.data.source.CryptodataRepository;
+import javax.inject.Inject;
 
 /**
  * Created by andronicus on 10/11/2017.
@@ -10,12 +10,10 @@ import kim.andronicus.cryptoasus.data.source.CryptodataRepository;
 
 public class CardsPresenter implements CardsContract.Presenter{
 
-    private CryptodataRepository mRepository;
     private CardsContract.View mView;
 
-    public CardsPresenter(@NonNull CryptodataRepository repository,
-                          @NonNull CardsContract.View view) {
-        mRepository = repository;
+    @Inject
+    public CardsPresenter(@NonNull CardsContract.View view) {
         mView = view;
 
         //Set Presenter
@@ -34,6 +32,7 @@ public class CardsPresenter implements CardsContract.Presenter{
 
     @Override
     public void createCard(String code) {
+
 
 
     }

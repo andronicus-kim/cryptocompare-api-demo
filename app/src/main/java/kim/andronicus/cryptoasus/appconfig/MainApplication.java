@@ -8,11 +8,15 @@ import android.app.Application;
 
 public class MainApplication extends Application {
 
+    private ApplicationComponent mComponent;
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerApplicationComponent.builder()
+        mComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
+    }
+    public ApplicationComponent getComponent(){
+        return mComponent;
     }
 }
