@@ -1,120 +1,13 @@
-<FrameLayout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="kim.andronicus.cryptoasus.cards.CardsFragment">
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_cards"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="4dp"
-        android:layout_margin="8dp"
-        app:contentPadding="5dp"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/dp16"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="40dp"
-                    android:text="BTC"/>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/iv_bt_currency_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/dollar_sign"/>
-                    <TextView
-                        android:layout_toRightOf="@id/iv_bt_currency_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="489.01"
-                        android:textSize="15dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:layout_below="@id/iv_bt_currency_icon"
-                        android:id="@+id/iv_bt_percentage_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/drop_icon"/>
-                    <TextView
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/iv_bt_currency_icon"
-                        android:layout_toRightOf="@id/iv_bt_percentage_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="4.73%"
-                        android:textSize="15dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="wrap_content"/>
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/dp16"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginRight="15dp"
-                    android:text="ETH"/>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="@dimen/dp16"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/iv_eth_currency_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/dollar_sign"/>
-                    <TextView
-                        android:layout_toRightOf="@id/iv_eth_currency_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="489.01"
-                        android:textSize="15dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:layout_below="@id/iv_eth_currency_icon"
-                        android:id="@+id/iv_eth_percentage_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/rise_icon"/>
-                    <TextView
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@id/iv_eth_currency_icon"
-                        android:layout_toRightOf="@id/iv_eth_percentage_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="4.73%"
-                        android:textSize="15dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="wrap_content"/>
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
+        android:layout_height="match_parent"/>
 
-    </android.support.v7.widget.CardView>
-
-
-</FrameLayout>
+</LinearLayout>
