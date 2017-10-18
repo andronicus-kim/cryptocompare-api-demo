@@ -42,7 +42,7 @@ public class ApplicationModule {
     @Provides
     Retrofit provideRetrofit(OkHttpClient client){
        return new Retrofit.Builder()
-               .baseUrl("")
+               .baseUrl("https://min-api.cryptocompare.com/data/")
                .client(client)
                .addConverterFactory(GsonConverterFactory.create())
                .build();
