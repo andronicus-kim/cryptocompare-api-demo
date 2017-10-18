@@ -42,7 +42,7 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             @Override
             public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
                 Log.d(TAG, "onResponse: " + response.body().getCNY());
-                callback.onCryptodataLoaded("loaded");
+                callback.onCryptodataLoaded(response.body().getCNY().toString());
             }
 
             @Override
@@ -63,7 +63,7 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             @Override
             public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
                 Log.d(TAG, "onResponse: " + response.body().getCNY());
-                callback.onCryptodataLoaded("loaded");
+                callback.onCryptodataLoaded(response.body().getCNY().toString());
             }
 
             @Override

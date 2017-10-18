@@ -11,7 +11,9 @@ public interface CardsContract {
 
     interface View extends BaseView<Presenter>{
 
-        void showCardCreated();
+        void showCardCreatedMessage();
+
+        void showCard(String exchangeRate,String code);
 
     }
     interface Presenter extends BasePresenter{

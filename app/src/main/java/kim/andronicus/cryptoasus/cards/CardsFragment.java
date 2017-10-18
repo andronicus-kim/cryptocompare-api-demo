@@ -12,8 +12,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import kim.andronicus.cryptoasus.R;
+import kim.andronicus.cryptoasus.data.models.Card;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +29,8 @@ public class CardsFragment extends Fragment implements CardsContract.View {
     private CardsContract.Presenter mPresenter;
 
     private RecyclerView mRecyclerView;
+
+    private CardsAdapter mAdapter;
 
     /*
     * This method is used to instantiate the CardsFragment
@@ -143,32 +150,64 @@ public class CardsFragment extends Fragment implements CardsContract.View {
     }
 
     @Override
-    public void showCardCreated() {
+    public void showCardCreatedMessage() {
 //        Toast.makeText(getActivity(), "Card Successfully Created!", Toast.LENGTH_SHORT).show();
         Snackbar.make(getView(),"Card Successfully Created!",Snackbar.LENGTH_SHORT).show();
     }
-   private class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder>{
 
+    @Override
+    public void showCard(String exchangeRate,String code) {
+        List<Card> cards = new ArrayList<>();
+        Card card = new Card();
+        card.setExchangeRate(exchangeRate);
+        card.setCurrency(code);
+        cards.add(card);
+        if (isAdded()){
+            if (mAdapter == null){
+                mAdapter = new CardsAdapter(cards);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        }
+    }
+
+    private class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder>{
+
+        private List<Card> mCards;
+
+        private CardsAdapter(List<Card> cards){
+            mCards = cards;
+        }
 
        @Override
-       public CardsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-           return null;
+       public CardsViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+           View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_list_item,parent,false);
+           return new CardsViewHolder(view);
        }
 
        @Override
-       public void onBindViewHolder(CardsViewHolder cardsViewHolder, int i) {
-
+       public void onBindViewHolder(CardsViewHolder holder, int position) {
+            holder.bind(mCards.get(position));
        }
 
        @Override
        public int getItemCount() {
-           return 0;
+           return mCards.size();
        }
    }
     private class CardsViewHolder extends RecyclerView.ViewHolder{
 
-        public CardsViewHolder(View itemView) {
-            super(itemView);
+        private TextView mTextViewExchangeRate;
+        private TextView mTextViewCurrency;
+
+        public CardsViewHolder(View view) {
+            super(view);
+            mTextViewExchangeRate = (TextView) view.findViewById(R.id.tv_btc_exchange_rate);
+            mTextViewCurrency = (TextView) view.findViewById(R.id.tv_btc_currency);
+        }
+
+        private void bind(Card card){
+            mTextViewExchangeRate.setText(card.getExchangeRate());
+            mTextViewCurrency.setText(card.getCurrency());
         }
     }
 }

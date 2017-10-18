@@ -40,13 +40,13 @@ public class CardsPresenter implements CardsContract.Presenter{
     }
 
     @Override
-    public void createCard(String code) {
+    public void createCard(final String code) {
 
         //Get BTC Exchange rate
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-
+                mView.showCard(message,code);
             }
 
             @Override
@@ -59,7 +59,7 @@ public class CardsPresenter implements CardsContract.Presenter{
         mRepository.getETH(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-
+                mView.showCard(message,code);
             }
 
             @Override
