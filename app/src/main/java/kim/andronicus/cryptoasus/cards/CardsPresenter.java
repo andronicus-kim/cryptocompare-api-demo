@@ -15,8 +15,10 @@ public class CardsPresenter implements CardsContract.Presenter{
     @Inject
     public CardsPresenter(@NonNull CardsContract.View view) {
         mView = view;
+    }
 
-        //Set Presenter
+    @Inject
+    void setUpListeners(){
         mView.setPresenter(this);
     }
 
