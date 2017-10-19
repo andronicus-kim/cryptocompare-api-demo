@@ -169,7 +169,6 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
     @Override
     public void showCardCreatedMessage() {
-//        Toast.makeText(getActivity(), "Card Successfully Created!", Toast.LENGTH_SHORT).show();
         Snackbar.make(getView(),"Card Successfully Created!",Snackbar.LENGTH_SHORT).show();
     }
 
