@@ -57,9 +57,6 @@ public class CardsPresenter implements CardsContract.Presenter{
     @Override
     public void createCard(final String code) {
 
-
-
-
         //Get BTC Exchange rate
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
@@ -88,7 +85,12 @@ public class CardsPresenter implements CardsContract.Presenter{
             }
         },code);
 
-        //                mView.showCard(exchangeRateBTC,exchangeRateETH,code);
+        /*
+        * Background Thread that waits for both network calls to finish then
+        * update the UI
+        *
+        * */
+
         mBackgroungThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -97,6 +99,9 @@ public class CardsPresenter implements CardsContract.Presenter{
                         Runnable runnable = new Runnable() {
                             @Override
                             public void run() {
+                                /*
+                                * Update UI using MainThread's Handler
+                                * */
                                 mHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -112,6 +117,9 @@ public class CardsPresenter implements CardsContract.Presenter{
         });
         mBackgroungThread.start();
     }
+    /*
+    * Interface to post back results
+    * */
     interface callbackListener{
         void onCallbacksComplete(String exchangeRateBTC,String exchangeRateETH,String code);
     }
