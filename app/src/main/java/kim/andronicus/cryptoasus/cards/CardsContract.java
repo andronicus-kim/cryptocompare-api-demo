@@ -17,6 +17,8 @@ public interface CardsContract {
 
         void showCard(String exchangeRateBTC,String exchangeRateETH, String code);
 
+        void showLoadingError();
+
 //        void showETHCard(String exchangeRate, String code);
 
     }

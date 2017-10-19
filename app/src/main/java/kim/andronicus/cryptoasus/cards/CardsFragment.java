@@ -1,6 +1,7 @@
 package kim.andronicus.cryptoasus.cards;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     private RecyclerView mRecyclerView;
 
     private CardsAdapter mAdapter;
+
+    private ProgressDialog mProgressDialog;
 
     /*
     * This method is used to instantiate the CardsFragment
@@ -53,6 +57,9 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
         View view = inflater.inflate(R.layout.cards_fragment, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_cards);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(true);
         final FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_create_cards);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +146,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
     private void createCard(String code) {
         mPresenter.createCard(code);
+        mProgressDialog.show();
     }
 
     @Override
@@ -167,6 +175,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
     @Override
     public void showCard(String exchangeRateBTC,String exchangeRateETH, String code) {
+        mProgressDialog.dismiss();
         List<Card> cards = new ArrayList<>();
         Card card = new Card();
         card.setExchangeRateBTC(exchangeRateBTC);
@@ -179,6 +188,12 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
                 mRecyclerView.setAdapter(mAdapter);
             }
         }
+        showCardCreatedMessage();
+    }
+
+    @Override
+    public void showLoadingError() {
+        Toast.makeText(getActivity(), "An Error occurred!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

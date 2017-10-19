@@ -111,6 +111,7 @@ public class CardsPresenter implements CardsContract.Presenter{
                             }
                         };
                         runnable.run();
+                        break;
                     }
                 }
             }

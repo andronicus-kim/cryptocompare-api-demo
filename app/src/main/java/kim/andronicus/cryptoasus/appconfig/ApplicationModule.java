@@ -2,6 +2,8 @@ package kim.andronicus.cryptoasus.appconfig;
 
 import android.content.Context;
 
+import java.util.concurrent.TimeUnit;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -37,6 +39,8 @@ public class ApplicationModule {
     OkHttpClient provideClient(HttpLoggingInterceptor loggingInterceptor){
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120,TimeUnit.SECONDS)
                 .build();
     }
     @Provides
