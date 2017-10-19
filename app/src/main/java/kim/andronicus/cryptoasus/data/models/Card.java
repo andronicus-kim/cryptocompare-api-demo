@@ -5,18 +5,19 @@ package kim.andronicus.cryptoasus.data.models;
  */
 
 public class Card {
-    private String exchangeRate;
+    private String exchangeRateBTC;
+    private String exchangeRateETH;
     private String currency;
 
     public Card() {
     }
 
-    public String getExchangeRate() {
-        return exchangeRate;
+    public String getExchangeRateBTC() {
+        return exchangeRateBTC;
     }
 
-    public void setExchangeRate(String exchangeRate) {
-        this.exchangeRate = exchangeRate;
+    public void setExchangeRateBTC(String exchangeRateBTC) {
+        this.exchangeRateBTC = exchangeRateBTC;
     }
 
     public String getCurrency() {
@@ -25,5 +26,13 @@ public class Card {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getExchangeRateETH() {
+        return exchangeRateETH;
+    }
+
+    public void setExchangeRateETH(String exchangeRateETH) {
+        this.exchangeRateETH = exchangeRateETH;
     }
 }

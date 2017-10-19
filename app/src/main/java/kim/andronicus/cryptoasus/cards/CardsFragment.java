@@ -2,6 +2,8 @@ package kim.andronicus.cryptoasus.cards;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -23,7 +25,7 @@ import kim.andronicus.cryptoasus.data.models.Card;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CardsFragment extends Fragment implements CardsContract.View {
+public class CardsFragment extends Fragment implements CardsContract.View,CardsPresenter.callbackListener {
     private static final String TAG = "CardsFragment";
 
     private CardsContract.Presenter mPresenter;
@@ -142,6 +144,14 @@ public class CardsFragment extends Fragment implements CardsContract.View {
     @Override
     public void onResume() {
         super.onResume();
+        Handler handler = new Handler(Looper.getMainLooper());
+        mPresenter.initializeCallbackListener(this,handler);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.unsubscribe();
     }
 
     @Override
@@ -156,10 +166,11 @@ public class CardsFragment extends Fragment implements CardsContract.View {
     }
 
     @Override
-    public void showCard(String exchangeRate,String code) {
+    public void showCard(String exchangeRateBTC,String exchangeRateETH, String code) {
         List<Card> cards = new ArrayList<>();
         Card card = new Card();
-        card.setExchangeRate(exchangeRate);
+        card.setExchangeRateBTC(exchangeRateBTC);
+        card.setExchangeRateETH(exchangeRateETH);
         card.setCurrency(code);
         cards.add(card);
         if (isAdded()){
@@ -168,6 +179,11 @@ public class CardsFragment extends Fragment implements CardsContract.View {
                 mRecyclerView.setAdapter(mAdapter);
             }
         }
+    }
+
+    @Override
+    public void onCallbacksComplete(String exchangeRateBTC, String exchangeRateETH, String code) {
+        showCard(exchangeRateBTC,exchangeRateETH,code);
     }
 
     private class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder>{
@@ -196,18 +212,24 @@ public class CardsFragment extends Fragment implements CardsContract.View {
    }
     private class CardsViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView mTextViewExchangeRate;
-        private TextView mTextViewCurrency;
+        private TextView mTextViewBTCExchangeRate;
+        private TextView mTextViewETHExchangeRate;
+        private TextView mTextViewBTCCurrency;
+        private TextView mTextViewETHCurrency;
 
         public CardsViewHolder(View view) {
             super(view);
-            mTextViewExchangeRate = (TextView) view.findViewById(R.id.tv_btc_exchange_rate);
-            mTextViewCurrency = (TextView) view.findViewById(R.id.tv_btc_currency);
+            mTextViewBTCExchangeRate = (TextView) view.findViewById(R.id.tv_btc_exchange_rate);
+            mTextViewETHExchangeRate = (TextView) view.findViewById(R.id.tv_eth_exchange_rate);
+            mTextViewBTCCurrency = (TextView) view.findViewById(R.id.tv_btc_currency);
+            mTextViewETHCurrency = (TextView) view.findViewById(R.id.tv_eth_currency);
         }
 
         private void bind(Card card){
-            mTextViewExchangeRate.setText(card.getExchangeRate());
-            mTextViewCurrency.setText(card.getCurrency());
+            mTextViewBTCExchangeRate.setText(card.getExchangeRateBTC());
+            mTextViewBTCCurrency.setText(card.getCurrency());
+            mTextViewETHExchangeRate.setText(card.getExchangeRateETH());
+            mTextViewETHCurrency.setText(card.getCurrency());
         }
     }
 }

@@ -63,7 +63,10 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             @Override
             public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
                 Log.d(TAG, "onResponse: " + response.body().getCNY());
-                callback.onCryptodataLoaded(response.body().getCNY().toString());
+                if(response.body().getCNY()!=null){
+                    callback.onCryptodataLoaded(response.body().getCNY().toString());
+                }
+                callback.onDataNotAvailable();
             }
 
             @Override

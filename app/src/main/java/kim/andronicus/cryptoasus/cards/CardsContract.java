@@ -1,5 +1,7 @@
 package kim.andronicus.cryptoasus.cards;
 
+import android.os.Handler;
+
 import kim.andronicus.cryptoasus.BasePresenter;
 import kim.andronicus.cryptoasus.BaseView;
 
@@ -13,11 +15,14 @@ public interface CardsContract {
 
         void showCardCreatedMessage();
 
-        void showCard(String exchangeRate,String code);
+        void showCard(String exchangeRateBTC,String exchangeRateETH, String code);
+
+//        void showETHCard(String exchangeRate, String code);
 
     }
     interface Presenter extends BasePresenter{
         void createCard(String code);
 
+        void initializeCallbackListener(CardsPresenter.callbackListener listener, Handler handler);
     }
 }

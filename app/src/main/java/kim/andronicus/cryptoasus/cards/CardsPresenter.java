@@ -1,5 +1,6 @@
 package kim.andronicus.cryptoasus.cards;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
@@ -13,9 +14,22 @@ import kim.andronicus.cryptoasus.data.source.CryptodataRepository;
 
 public class CardsPresenter implements CardsContract.Presenter{
 
+    private boolean isBTCdone;
+
+    private boolean isETHdone;
+
+    private String exchangeRateBTC;
+
+    private String exchangeRateETH;
+
+    private callbackListener mCallbackListener;
+
+    private Handler mHandler;
+
     private CardsContract.View mView;
 
     private CryptodataRepository mRepository;
+    private Thread mBackgroungThread;
 
     @Inject
     public CardsPresenter(@NonNull CardsContract.View view,
@@ -36,17 +50,22 @@ public class CardsPresenter implements CardsContract.Presenter{
 
     @Override
     public void unsubscribe() {
+        mBackgroungThread.interrupt();
 
     }
 
     @Override
     public void createCard(final String code) {
 
+
+
+
         //Get BTC Exchange rate
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-                mView.showCard(message,code);
+                isBTCdone = true;
+                exchangeRateBTC = message;
             }
 
             @Override
@@ -59,7 +78,8 @@ public class CardsPresenter implements CardsContract.Presenter{
         mRepository.getETH(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-                mView.showCard(message,code);
+                isETHdone = true;
+                exchangeRateETH = message;
             }
 
             @Override
@@ -67,5 +87,37 @@ public class CardsPresenter implements CardsContract.Presenter{
 
             }
         },code);
+
+        //                mView.showCard(exchangeRateBTC,exchangeRateETH,code);
+        mBackgroungThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    if (isBTCdone && isETHdone){
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mCallbackListener.onCallbacksComplete(exchangeRateBTC,exchangeRateETH,code);
+                                    }
+                                });
+                            }
+                        };
+//                mView.showCard(exchangeRateBTC,exchangeRateETH,code);
+                        runnable.run();
+                    }
+                }
+            }
+        });
+        mBackgroungThread.start();
+    }
+    interface callbackListener{
+        void onCallbacksComplete(String exchangeRateBTC,String exchangeRateETH,String code);
+    }
+    public void initializeCallbackListener(callbackListener listener, Handler handler){
+        mCallbackListener = listener;
+        mHandler = handler;
     }
 }
