@@ -105,7 +105,6 @@ public class CardsPresenter implements CardsContract.Presenter{
                                 });
                             }
                         };
-//                mView.showCard(exchangeRateBTC,exchangeRateETH,code);
                         runnable.run();
                     }
                 }
