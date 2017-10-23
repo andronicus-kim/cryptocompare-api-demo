@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kim.andronicus.cryptoasus.R;
+import kim.andronicus.cryptoasus.conversion.ConversionActivity;
 import kim.andronicus.cryptoasus.data.models.Card;
 
 /**
@@ -224,7 +225,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
            return mCards.size();
        }
    }
-    private class CardsViewHolder extends RecyclerView.ViewHolder{
+    private class CardsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView mTextViewBTCExchangeRate;
         private TextView mTextViewETHExchangeRate;
@@ -233,6 +234,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
         public CardsViewHolder(View view) {
             super(view);
+            view.setOnClickListener(this);
             mTextViewBTCExchangeRate = (TextView) view.findViewById(R.id.tv_btc_exchange_rate);
             mTextViewETHExchangeRate = (TextView) view.findViewById(R.id.tv_eth_exchange_rate);
             mTextViewBTCCurrency = (TextView) view.findViewById(R.id.tv_btc_currency);
@@ -244,6 +246,12 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
             mTextViewBTCCurrency.setText(card.getCurrency());
             mTextViewETHExchangeRate.setText(card.getExchangeRateETH());
             mTextViewETHCurrency.setText(card.getCurrency());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_SHORT).show();
+            startActivity(ConversionActivity.newIntent(getActivity()));
         }
     }
 }

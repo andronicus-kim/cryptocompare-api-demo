@@ -65,8 +65,8 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
         callETH.enqueue(new Callback<CryptodataResponse>() {
             @Override
             public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
-                Log.d(TAG, "onResponse: " + response.body().getCNY());
-                if(response.body().getCNY()!=null){
+                Log.d(TAG, "onResponse: " + response);
+                if(response.body()!=null){
                     callback.onCryptodataLoaded(response.body().getCNY().toString());
                 }
                 callback.onDataNotAvailable();

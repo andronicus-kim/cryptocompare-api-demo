@@ -15,6 +15,15 @@ import kim.andronicus.cryptoasus.R;
 public class ConversionFragment extends Fragment {
 
 
+    public static ConversionFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        ConversionFragment fragment = new ConversionFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public ConversionFragment() {
         // Required empty public constructor
     }
