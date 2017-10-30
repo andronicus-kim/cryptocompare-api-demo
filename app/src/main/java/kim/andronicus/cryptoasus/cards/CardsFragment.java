@@ -38,6 +38,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     private CardsAdapter mAdapter;
 
     private ProgressDialog mProgressDialog;
+    private List<Card> mCards;
 
     /*
     * This method is used to instantiate the CardsFragment
@@ -176,17 +177,20 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     @Override
     public void showCard(String exchangeRateBTC,String exchangeRateETH, String code) {
         mProgressDialog.dismiss();
-        List<Card> cards = new ArrayList<>();
         Card card = new Card();
         card.setExchangeRateBTC(exchangeRateBTC);
         card.setExchangeRateETH(exchangeRateETH);
         card.setCurrency(code);
-        cards.add(card);
+        if (mCards == null){
+            mCards = new ArrayList<>();
+        }
+        mCards.add(card);
         if (isAdded()){
             if (mAdapter == null){
-                mAdapter = new CardsAdapter(cards);
+                mAdapter = new CardsAdapter(mCards);
                 mRecyclerView.setAdapter(mAdapter);
             }
+            mAdapter.notifyDataSetChanged();
         }
         showCardCreatedMessage();
     }

@@ -14,10 +14,6 @@ import kim.andronicus.cryptoasus.data.source.CryptodataRepository;
 
 public class CardsPresenter implements CardsContract.Presenter{
 
-    private boolean isBTCdone;
-
-    private boolean isETHdone;
-
     private String exchangeRateBTC;
 
     private String exchangeRateETH;
@@ -57,11 +53,11 @@ public class CardsPresenter implements CardsContract.Presenter{
     @Override
     public void createCard(final String code) {
 
+
         //Get BTC Exchange rate
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-                isBTCdone = true;
                 exchangeRateBTC = message;
             }
 
@@ -75,7 +71,6 @@ public class CardsPresenter implements CardsContract.Presenter{
         mRepository.getETH(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-                isETHdone = true;
                 exchangeRateETH = message;
             }
 
@@ -95,24 +90,27 @@ public class CardsPresenter implements CardsContract.Presenter{
             @Override
             public void run() {
                 while(true){
-                    if (isBTCdone && isETHdone){
-                        Runnable runnable = new Runnable() {
-                            @Override
-                            public void run() {
+                    if (exchangeRateETH!=null && exchangeRateBTC!=null){
+                        if (!exchangeRateBTC.isEmpty() && !exchangeRateETH.isEmpty()){
+                            Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
                                 /*
                                 * Update UI using MainThread's Handler
                                 * */
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mCallbackListener.onCallbacksComplete(exchangeRateBTC,exchangeRateETH,code);
-                                    }
-                                });
-                            }
-                        };
-                        runnable.run();
-                        break;
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mCallbackListener.onCallbacksComplete(exchangeRateBTC,exchangeRateETH,code);
+                                        }
+                                    });
+                                }
+                            };
+                            runnable.run();
+                            break;
+                        }
                     }
+
                 }
             }
         });
