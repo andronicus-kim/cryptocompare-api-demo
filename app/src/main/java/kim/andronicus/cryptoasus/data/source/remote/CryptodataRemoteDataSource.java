@@ -2,10 +2,11 @@ package kim.andronicus.cryptoasus.data.source.remote;
 
 import android.util.Log;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import kim.andronicus.cryptoasus.data.models.Card;
-import kim.andronicus.cryptoasus.data.models.CryptodataResponse;
 import kim.andronicus.cryptoasus.data.source.CryptodataAPIService;
 import kim.andronicus.cryptoasus.data.source.CryptodataDataSource;
 import retrofit2.Call;
@@ -33,47 +34,49 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
     }
 
     @Override
-    public void getBTC(final loadCardsCallback callback,String code) {
+    public void getBTC(final loadCardsCallback callback,final String code) {
         /*
         * This client makes an api call to query BTC exchange rate against the currency given
         * */
-        Call<CryptodataResponse> callBTC = mRetrofit.create(CryptodataAPIService.class).getBTCExchangeRate("BTC",code);
-        callBTC.enqueue(new Callback<CryptodataResponse>() {
+        Call<Map<String,Object>> callBTC = mRetrofit.create(CryptodataAPIService.class).getBTCExchangeRate("BTC",code);
+        callBTC.enqueue(new Callback<Map<String,Object>>() {
             @Override
-            public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
-                Log.d(TAG, "onResponse: " + response.body().getCNY());
-                if (response.body().getCNY()!=null){
-                    callback.onCryptodataLoaded(response.body().getCNY().toString());
+            public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
+                if (response.body()!=null){
+                    Map<String,Object> mappedResponse = response.body();
+                    Log.d(TAG, "CNY BTC: " + String.valueOf((double)(mappedResponse.get(code))));
+                    callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
                 }
                 callback.onDataNotAvailable();
             }
 
             @Override
-            public void onFailure(Call<CryptodataResponse> call, Throwable t) {
+            public void onFailure(Call<Map<String,Object>> call, Throwable t) {
 
             }
         });
     }
 
     @Override
-    public void getETH(final loadCardsCallback callback, String code) {
+    public void getETH(final loadCardsCallback callback, final String code) {
          /*
         * This client makes an api call to query ETH exchange rate against the currency given
         * */
 
-        Call<CryptodataResponse> callETH = mRetrofit.create(CryptodataAPIService.class).getETHExchangeRate("ETH",code);
-        callETH.enqueue(new Callback<CryptodataResponse>() {
+        Call<Map<String,Object>> callETH = mRetrofit.create(CryptodataAPIService.class).getETHExchangeRate("ETH",code);
+        callETH.enqueue(new Callback<Map<String,Object>>() {
             @Override
-            public void onResponse(Call<CryptodataResponse> call, Response<CryptodataResponse> response) {
-                Log.d(TAG, "onResponse: " + response);
+            public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
                 if(response.body()!=null){
-                    callback.onCryptodataLoaded(response.body().getCNY().toString());
+                    Map<String,Object> mappedR = response.body();
+                    Log.d(TAG, "CNY ETH: " + String.valueOf((double)(mappedR.get(code))));
+                    callback.onCryptodataLoaded(String.valueOf((double)(mappedR.get(code))));
                 }
                 callback.onDataNotAvailable();
             }
 
             @Override
-            public void onFailure(Call<CryptodataResponse> call, Throwable t) {
+            public void onFailure(Call<Map<String,Object>> call, Throwable t) {
 
             }
         });

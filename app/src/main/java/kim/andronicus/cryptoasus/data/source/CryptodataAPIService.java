@@ -1,6 +1,7 @@
 package kim.andronicus.cryptoasus.data.source;
 
-import kim.andronicus.cryptoasus.data.models.CryptodataResponse;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -12,9 +13,9 @@ import retrofit2.http.Query;
 public interface CryptodataAPIService {
 
     @GET("price")
-    Call<CryptodataResponse> getBTCExchangeRate(@Query("fsym") String fCode,
+    Call<Map<String,Object>> getBTCExchangeRate(@Query("fsym") String fCode,
                                                 @Query("tsyms") String tCode);
     @GET("price")
-    Call<CryptodataResponse> getETHExchangeRate(@Query("fsym") String fCode,
+    Call<Map<String,Object>> getETHExchangeRate(@Query("fsym") String fCode,
                                                 @Query("tsyms") String tCode);
 }
