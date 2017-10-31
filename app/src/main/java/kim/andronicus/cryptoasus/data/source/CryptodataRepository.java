@@ -37,6 +37,10 @@ public class CryptodataRepository implements CryptodataDataSource{
     }
 
     @Override
+    public void getConvertedCurrency(loadCardsCallback callback, String fCode, String tCode) {
+        mRemoteDataSource.getConvertedCurrency(callback,fCode,tCode);
+    }
+    @Override
     public void getOne(String id) {
 
     }

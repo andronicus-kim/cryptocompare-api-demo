@@ -18,6 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="USD"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
             />
         <EditText
             android:id="@+id/et_currency_to_be_converted"
@@ -30,6 +32,7 @@
             android:id="@+id/sp_conversion"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

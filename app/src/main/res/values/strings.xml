@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Crypto Asus</string>
     <string-array name="cryptocurrencies">
+        <item>Select Currency</item>
         <item>BTC</item>
         <item>ETH</item>
     </string-array>

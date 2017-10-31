@@ -18,7 +18,7 @@ public interface CryptodataAPIService {
     @GET("price")
     Call<Map<String,Object>> getETHExchangeRate(@Query("fsym") String fCode,
                                                 @Query("tsyms") String tCode);
-//    @GET("price")
-//    Call<Map<String,Object>> convertCurrency(@Query("fsym") String fCode,
-//                                                @Query("tsyms") String tCode);
+    @GET("price")
+    Call<Map<String,Object>> convertCurrency(@Query("fsym") String fCode,
+                                                @Query("tsyms") String tCode);
 }

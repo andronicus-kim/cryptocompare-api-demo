@@ -67,9 +67,9 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             @Override
             public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
                 if(response.body()!=null){
-                    Map<String,Object> mappedR = response.body();
-                    Log.d(TAG, "CNY ETH: " + String.valueOf((double)(mappedR.get(code))));
-                    callback.onCryptodataLoaded(String.valueOf((double)(mappedR.get(code))));
+                    Map<String,Object> mappedResponse = response.body();
+                    Log.d(TAG, "CNY ETH: " + String.valueOf((double)(mappedResponse.get(code))));
+                    callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
                 }
             }
 
@@ -77,6 +77,28 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             public void onFailure(Call<Map<String,Object>> call, Throwable t) {
 
                 callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    @Override
+    public void getConvertedCurrency(final loadCardsCallback callback, String fCode, final String tCode) {
+        Call<Map<String,Object>> call = mRetrofit.create(CryptodataAPIService.class).convertCurrency(fCode,tCode);
+        call.enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if (response.body()!=null){
+                    Map<String,Object> mappedResponse = response.body();
+                    Log.d(TAG, "CNY BTC: " + String.valueOf((double)(mappedResponse.get(tCode))));
+                    callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(tCode))));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+
+                callback.onDataNotAvailable();
+
             }
         });
     }

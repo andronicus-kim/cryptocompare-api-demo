@@ -14,5 +14,7 @@ public interface ConversionContract {
     }
     interface Presenter extends BasePresenter{
 
+        void convertCurrency(String fCode, String tCode);
+
     }
 }

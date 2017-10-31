@@ -12,6 +12,8 @@ public interface DataSource<T,E,T1> {
 
     void getETH(T1 callback, String code);
 
+    void getConvertedCurrency(T1 callback,String fCode,String tCode);
+
     void getOne(E id);
 
     void save(T item);
