@@ -254,8 +254,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_SHORT).show();
-            startActivity(ConversionActivity.newIntent(getActivity()));
+            startActivity(ConversionActivity.newIntent(getActivity(),mCards.get(getAdapterPosition()).getCurrency()));
         }
     }
 }
