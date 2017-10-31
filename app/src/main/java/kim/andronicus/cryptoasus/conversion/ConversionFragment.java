@@ -7,16 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kim.andronicus.cryptoasus.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConversionFragment extends Fragment implements ConversionContract.View{
+public class ConversionFragment extends Fragment implements ConversionContract.View,AdapterView.OnItemSelectedListener{
 
     private static final String CONVERSION_CURRENCY = "CONVERSION_CURRENCY";
 
@@ -56,11 +58,30 @@ public class ConversionFragment extends Fragment implements ConversionContract.V
                 R.array.cryptocurrencies,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         return view;
     }
 
     @Override
     public void setPresenter(ConversionContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        switch (position){
+            case 0:
+                Toast.makeText(getActivity(), "Item Selected at position 0", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(getActivity(), "Item Selected at position 1", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

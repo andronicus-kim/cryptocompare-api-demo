@@ -63,7 +63,7 @@ public class CardsPresenter implements CardsContract.Presenter{
 
             @Override
             public void onDataNotAvailable() {
-
+                mView.showLoadingError();
             }
         },code);
 
@@ -77,6 +77,7 @@ public class CardsPresenter implements CardsContract.Presenter{
             @Override
             public void onDataNotAvailable() {
 
+                mView.showLoadingError();
             }
         },code);
 
@@ -102,6 +103,8 @@ public class CardsPresenter implements CardsContract.Presenter{
                                         @Override
                                         public void run() {
                                             mCallbackListener.onCallbacksComplete(exchangeRateBTC,exchangeRateETH,code);
+                                            exchangeRateBTC = null;
+                                            exchangeRateETH = null;
                                         }
                                     });
                                 }

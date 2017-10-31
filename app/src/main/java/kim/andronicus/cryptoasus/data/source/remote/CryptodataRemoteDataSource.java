@@ -47,12 +47,11 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
                     Log.d(TAG, "CNY BTC: " + String.valueOf((double)(mappedResponse.get(code))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
                 }
-                callback.onDataNotAvailable();
             }
 
             @Override
             public void onFailure(Call<Map<String,Object>> call, Throwable t) {
-
+                callback.onDataNotAvailable();
             }
         });
     }
@@ -72,12 +71,12 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
                     Log.d(TAG, "CNY ETH: " + String.valueOf((double)(mappedR.get(code))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedR.get(code))));
                 }
-                callback.onDataNotAvailable();
             }
 
             @Override
             public void onFailure(Call<Map<String,Object>> call, Throwable t) {
 
+                callback.onDataNotAvailable();
             }
         });
     }

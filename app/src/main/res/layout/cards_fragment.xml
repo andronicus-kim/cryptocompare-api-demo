@@ -10,6 +10,14 @@
         android:id="@+id/rv_cards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No cards created!"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="20sp"/>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_create_cards"
         android:layout_width="wrap_content"

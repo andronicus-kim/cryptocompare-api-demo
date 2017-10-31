@@ -20,6 +20,7 @@
             tools:text="USD"
             />
         <EditText
+            android:id="@+id/et_currency_to_be_converted"
             android:layout_weight="2"
             android:hint="Enter Amount"
             android:gravity="center_horizontal"
@@ -34,12 +35,14 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_convert_currency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp16"
         android:layout_marginRight="@dimen/dp16"
         android:text="CONVERT"/>
     <TextView
+        android:id="@+id/tv_conversion_result"
         android:layout_marginTop="@dimen/dp16"
         android:padding="10dp"
         android:layout_width="match_parent"

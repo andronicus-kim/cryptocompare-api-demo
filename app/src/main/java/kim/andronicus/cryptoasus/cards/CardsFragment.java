@@ -33,6 +33,8 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
     private CardsContract.Presenter mPresenter;
 
+    private TextView mTextViewEmpty;
+
     private RecyclerView mRecyclerView;
 
     private CardsAdapter mAdapter;
@@ -57,6 +59,8 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cards_fragment, container, false);
+        mTextViewEmpty = (TextView) view.findViewById(R.id.tv_empty);
+        mTextViewEmpty.setVisibility(View.VISIBLE);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_cards);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mProgressDialog = new ProgressDialog(getActivity());
@@ -157,10 +161,9 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
         Handler handler = new Handler(Looper.getMainLooper());
         mPresenter.initializeCallbackListener(this,handler);
     }
-
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         mPresenter.unsubscribe();
     }
 
@@ -176,6 +179,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
     @Override
     public void showCard(String exchangeRateBTC,String exchangeRateETH, String code) {
+        mTextViewEmpty.setVisibility(View.GONE);
         mProgressDialog.dismiss();
         Card card = new Card();
         card.setExchangeRateBTC(exchangeRateBTC);
@@ -197,7 +201,8 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
 
     @Override
     public void showLoadingError() {
-        Toast.makeText(getActivity(), "An Error occurred!", Toast.LENGTH_SHORT).show();
+        mProgressDialog.dismiss();
+        Toast.makeText(getActivity(), "An Error occurred,check connection and TRY AGAIN!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
