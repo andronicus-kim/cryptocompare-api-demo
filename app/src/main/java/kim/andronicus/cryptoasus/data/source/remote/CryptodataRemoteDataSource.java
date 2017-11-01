@@ -45,6 +45,7 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
                     Map<String,Object> mappedResponse = response.body();
                     Log.d(TAG, "CNY BTC: " + String.valueOf((double)(mappedResponse.get(code))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
+                    callback.resetValues(true);
                 }
             }
 
@@ -69,6 +70,7 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
                     Map<String,Object> mappedResponse = response.body();
                     Log.d(TAG, "CNY ETH: " + String.valueOf((double)(mappedResponse.get(code))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
+                    callback.resetValues(true);
                 }
             }
 
@@ -101,4 +103,5 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             }
         });
     }
+
 }

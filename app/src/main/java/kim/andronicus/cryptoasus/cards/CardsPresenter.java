@@ -2,6 +2,7 @@ package kim.andronicus.cryptoasus.cards;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -17,6 +18,12 @@ public class CardsPresenter implements CardsContract.Presenter{
     private String exchangeRateBTC;
 
     private String exchangeRateETH;
+
+    private boolean updating = false;
+
+    private boolean BTCReceived = false;
+
+    private boolean ETHReceived = false;
 
     private callbackListener mCallbackListener;
 
@@ -54,16 +61,27 @@ public class CardsPresenter implements CardsContract.Presenter{
     @Override
     public void createCard(final String code) {
 
+        updating = true;
+
+
         //Get BTC Exchange rate
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
+                Log.d("BTC RECEIVED", "onCryptodataLoaded: ");
+                BTCReceived = true;
                 exchangeRateBTC = message;
+
             }
 
             @Override
             public void onDataNotAvailable() {
                 mView.showLoadingError();
+            }
+
+            @Override
+            public void resetValues(boolean state) {
+                resetBTC(state);
             }
         },code);
 
@@ -71,13 +89,23 @@ public class CardsPresenter implements CardsContract.Presenter{
         mRepository.getETH(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
+                Log.d("ETH RECEIVED", "onCryptodataLoaded: ");
+                ETHReceived = true;
                 exchangeRateETH = message;
+
             }
 
             @Override
             public void onDataNotAvailable() {
 
                 mView.showLoadingError();
+            }
+
+            @Override
+            public void resetValues(boolean state) {
+
+                resetETH(state);
+
             }
         },code);
 
@@ -90,9 +118,13 @@ public class CardsPresenter implements CardsContract.Presenter{
         mBackgroungThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true){
-                    if (exchangeRateETH != null && exchangeRateBTC != null){
-//                        if (!exchangeRateBTC.isEmpty() && !exchangeRateETH.isEmpty()){
+                Log.d("while loop", "run: ");
+                while(updating){
+                    Log.d("inside while loop", "run: ");
+                    if (BTCReceived && ETHReceived){
+                        updating = false;
+                        Log.d("while loop2", "run: ");
+
                             Runnable runnable = new Runnable() {
                                 @Override
                                 public void run() {
@@ -102,15 +134,13 @@ public class CardsPresenter implements CardsContract.Presenter{
                                     mHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
+                                            mView.dismissDialog();
                                             mCallbackListener.onCallbacksComplete(exchangeRateBTC,exchangeRateETH,code);
-
                                         }
                                     });
                                 }
                             };
                             runnable.run();
-                            break;
-//                        }
                     }
 
                 }
@@ -118,6 +148,16 @@ public class CardsPresenter implements CardsContract.Presenter{
         });
         mBackgroungThread.start();
     }
+
+    @Override
+    public void resetBTC(boolean state) {
+        BTCReceived = state;
+
+    }@Override
+    public void resetETH(boolean state) {
+        ETHReceived = state;
+    }
+
     /*
     * Interface to post back results
     * */

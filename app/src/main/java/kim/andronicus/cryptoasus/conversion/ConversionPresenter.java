@@ -54,6 +54,11 @@ public class ConversionPresenter implements ConversionContract.Presenter{
                 mView.showConversionError();
 
             }
+
+            @Override
+            public void resetValues(boolean state) {
+
+            }
         },fCode,tCode);
     }
 }

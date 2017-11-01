@@ -15,5 +15,7 @@ public interface CryptodataDataSource extends DataSource<Card,String,CryptodataD
 
         void onDataNotAvailable();
 
+        void resetValues(boolean state);
+
     }
 }

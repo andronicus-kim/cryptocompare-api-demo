@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -169,8 +170,13 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     }
 
     private void createCard(String code) {
-        mPresenter.createCard(code);
+        Log.d(TAG, "createCard: ");
         mProgressDialog.show();
+
+        mPresenter.resetETH(false);
+        mPresenter.resetBTC(false);
+        mPresenter.createCard(code);
+
     }
 
     @Override
@@ -198,7 +204,6 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     @Override
     public void showCard(String exchangeRateBTC,String exchangeRateETH, String code) {
         mTextViewEmpty.setVisibility(View.GONE);
-        mProgressDialog.dismiss();
         Card card = new Card();
         card.setExchangeRateBTC(exchangeRateBTC);
         card.setExchangeRateETH(exchangeRateETH);
@@ -221,6 +226,11 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     public void showLoadingError() {
         mProgressDialog.dismiss();
         Toast.makeText(getActivity(), "An Error occurred,check connection and TRY AGAIN!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void dismissDialog() {
+        mProgressDialog.dismiss();
     }
 
     @Override

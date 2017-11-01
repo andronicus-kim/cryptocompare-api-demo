@@ -19,11 +19,17 @@ public interface CardsContract {
 
         void showLoadingError();
 
+        void dismissDialog();
+
 //        void showETHCard(String exchangeRate, String code);
 
     }
     interface Presenter extends BasePresenter{
         void createCard(String code);
+
+        void resetBTC(boolean state);
+
+        void resetETH(boolean state);
 
         void initializeCallbackListener(CardsPresenter.callbackListener listener, Handler handler);
     }
