@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
-import kim.andronicus.cryptoasus.data.models.Card;
 import kim.andronicus.cryptoasus.data.source.remote.CryptodataRemoteDataSource;
 
 /**
@@ -39,29 +38,5 @@ public class CryptodataRepository implements CryptodataDataSource{
     @Override
     public void getConvertedCurrency(loadCardsCallback callback, String fCode, String tCode) {
         mRemoteDataSource.getConvertedCurrency(callback,fCode,tCode);
-    }
-    @Override
-    public void getOne(String id) {
-
-    }
-
-    @Override
-    public void save(Card item) {
-
-    }
-
-    @Override
-    public void update(Card item) {
-
-    }
-
-    @Override
-    public void delete(String id) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
     }
 }

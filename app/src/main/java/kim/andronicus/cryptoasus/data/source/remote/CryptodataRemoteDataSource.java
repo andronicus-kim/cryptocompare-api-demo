@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import kim.andronicus.cryptoasus.data.models.Card;
 import kim.andronicus.cryptoasus.data.source.CryptodataAPIService;
 import kim.andronicus.cryptoasus.data.source.CryptodataDataSource;
 import retrofit2.Call;
@@ -101,30 +100,5 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
 
             }
         });
-    }
-
-    @Override
-    public void getOne(String id) {
-
-    }
-
-    @Override
-    public void save(Card item) {
-
-    }
-
-    @Override
-    public void update(Card item) {
-
-    }
-
-    @Override
-    public void delete(String id) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
     }
 }
