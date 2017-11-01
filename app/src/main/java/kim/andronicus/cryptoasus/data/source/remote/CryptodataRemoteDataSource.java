@@ -1,7 +1,5 @@
 package kim.andronicus.cryptoasus.data.source.remote;
 
-import android.util.Log;
-
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -43,7 +41,6 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
                 if (response.body()!=null){
                     Map<String,Object> mappedResponse = response.body();
-                    Log.d(TAG, "CNY BTC: " + String.valueOf((double)(mappedResponse.get(code))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
                     callback.resetValues(true);
                 }
@@ -68,7 +65,6 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             public void onResponse(Call<Map<String,Object>> call, Response<Map<String,Object>> response) {
                 if(response.body()!=null){
                     Map<String,Object> mappedResponse = response.body();
-                    Log.d(TAG, "CNY ETH: " + String.valueOf((double)(mappedResponse.get(code))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(code))));
                     callback.resetValues(true);
                 }
@@ -84,13 +80,16 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
 
     @Override
     public void getConvertedCurrency(final loadCardsCallback callback, String fCode, final String tCode) {
+
+        /*
+        * Network call to convert Currencies
+        * */
         Call<Map<String,Object>> call = mRetrofit.create(CryptodataAPIService.class).convertCurrency(fCode,tCode);
         call.enqueue(new Callback<Map<String, Object>>() {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
                 if (response.body()!=null){
                     Map<String,Object> mappedResponse = response.body();
-                    Log.d(TAG, "Conversion: " + String.valueOf((double)(mappedResponse.get(tCode))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(tCode))));
                 }
             }

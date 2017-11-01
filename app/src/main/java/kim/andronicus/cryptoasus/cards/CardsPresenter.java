@@ -32,6 +32,7 @@ public class CardsPresenter implements CardsContract.Presenter{
     private CardsContract.View mView;
 
     private CryptodataRepository mRepository;
+
     private Thread mBackgroungThread;
 
     @Inject
@@ -53,6 +54,7 @@ public class CardsPresenter implements CardsContract.Presenter{
 
     @Override
     public void unsubscribe() {
+        //Interrupt Thread if fragment is destroyed
         if (mBackgroungThread!=null){
             mBackgroungThread.interrupt();
         }
@@ -68,7 +70,6 @@ public class CardsPresenter implements CardsContract.Presenter{
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-                Log.d("BTC RECEIVED", "onCryptodataLoaded: ");
                 BTCReceived = true;
                 exchangeRateBTC = message;
 
@@ -89,7 +90,6 @@ public class CardsPresenter implements CardsContract.Presenter{
         mRepository.getETH(new CryptodataDataSource.loadCardsCallback() {
             @Override
             public void onCryptodataLoaded(String message) {
-                Log.d("ETH RECEIVED", "onCryptodataLoaded: ");
                 ETHReceived = true;
                 exchangeRateETH = message;
 
@@ -118,13 +118,13 @@ public class CardsPresenter implements CardsContract.Presenter{
         mBackgroungThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("while loop", "run: ");
+                /*
+                * A loop that runs while updating is true until both
+                * network calls return values for Bitcoin and Ethereum
+                * */
                 while(updating){
-                    Log.d("inside while loop", "run: ");
                     if (BTCReceived && ETHReceived){
                         updating = false;
-                        Log.d("while loop2", "run: ");
-
                             Runnable runnable = new Runnable() {
                                 @Override
                                 public void run() {

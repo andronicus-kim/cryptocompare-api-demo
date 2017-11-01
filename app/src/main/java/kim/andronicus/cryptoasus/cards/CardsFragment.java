@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -170,9 +169,7 @@ public class CardsFragment extends Fragment implements CardsContract.View,CardsP
     }
 
     private void createCard(String code) {
-        Log.d(TAG, "createCard: ");
         mProgressDialog.show();
-
         mPresenter.resetETH(false);
         mPresenter.resetBTC(false);
         mPresenter.createCard(code);
