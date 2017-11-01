@@ -89,7 +89,7 @@ public class CryptodataRemoteDataSource implements CryptodataDataSource{
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
                 if (response.body()!=null){
                     Map<String,Object> mappedResponse = response.body();
-                    Log.d(TAG, "CNY BTC: " + String.valueOf((double)(mappedResponse.get(tCode))));
+                    Log.d(TAG, "Conversion: " + String.valueOf((double)(mappedResponse.get(tCode))));
                     callback.onCryptodataLoaded(String.valueOf((double)(mappedResponse.get(tCode))));
                 }
             }

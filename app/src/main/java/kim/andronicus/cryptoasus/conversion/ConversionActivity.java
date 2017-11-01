@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import javax.inject.Inject;
+
 import kim.andronicus.cryptoasus.R;
 import kim.andronicus.cryptoasus.appconfig.MainApplication;
 import kim.andronicus.cryptoasus.util.ActivityUtils;
@@ -18,6 +20,9 @@ public class ConversionActivity extends AppCompatActivity {
         intent.putExtra(CONVERSION_CURRENCY,currency);
         return intent;
     }
+
+    @Inject
+    ConversionPresenter mConversionPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

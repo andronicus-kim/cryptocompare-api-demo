@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import kim.andronicus.cryptoasus.data.source.CryptodataDataSource;
 import kim.andronicus.cryptoasus.data.source.CryptodataRepository;
 
 /**
@@ -40,6 +41,19 @@ public class ConversionPresenter implements ConversionContract.Presenter{
 
     @Override
     public void convertCurrency(String fCode, String tCode) {
+        mRepository.getConvertedCurrency(new CryptodataDataSource.loadCardsCallback() {
+            @Override
+            public void onCryptodataLoaded(String message) {
 
+                mView.showResult(Double.parseDouble(message));
+
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                mView.showConversionError();
+
+            }
+        },fCode,tCode);
     }
 }

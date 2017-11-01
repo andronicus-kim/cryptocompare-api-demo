@@ -11,6 +11,10 @@ public interface ConversionContract {
 
     interface View extends BaseView<Presenter>{
 
+        void showResult(Double result);
+
+        void showConversionError();
+
     }
     interface Presenter extends BasePresenter{
 
