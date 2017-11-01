@@ -46,13 +46,13 @@ public class CardsPresenter implements CardsContract.Presenter{
 
     @Override
     public void unsubscribe() {
-        mBackgroungThread.interrupt();
-
+        if (mBackgroungThread!=null){
+            mBackgroungThread.interrupt();
+        }
     }
 
     @Override
     public void createCard(final String code) {
-
 
         //Get BTC Exchange rate
         mRepository.getBTC(new CryptodataDataSource.loadCardsCallback() {
@@ -91,8 +91,8 @@ public class CardsPresenter implements CardsContract.Presenter{
             @Override
             public void run() {
                 while(true){
-                    if (exchangeRateETH!=null && exchangeRateBTC!=null){
-                        if (!exchangeRateBTC.isEmpty() && !exchangeRateETH.isEmpty()){
+                    if (exchangeRateETH != null && exchangeRateBTC != null){
+//                        if (!exchangeRateBTC.isEmpty() && !exchangeRateETH.isEmpty()){
                             Runnable runnable = new Runnable() {
                                 @Override
                                 public void run() {
@@ -103,15 +103,14 @@ public class CardsPresenter implements CardsContract.Presenter{
                                         @Override
                                         public void run() {
                                             mCallbackListener.onCallbacksComplete(exchangeRateBTC,exchangeRateETH,code);
-                                            exchangeRateBTC = null;
-                                            exchangeRateETH = null;
+
                                         }
                                     });
                                 }
                             };
                             runnable.run();
                             break;
-                        }
+//                        }
                     }
 
                 }

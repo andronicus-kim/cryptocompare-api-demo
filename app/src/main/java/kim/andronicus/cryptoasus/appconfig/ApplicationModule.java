@@ -39,8 +39,8 @@ public class ApplicationModule {
     OkHttpClient provideClient(HttpLoggingInterceptor loggingInterceptor){
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30,TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10,TimeUnit.SECONDS)
                 .build();
     }
     @Provides
