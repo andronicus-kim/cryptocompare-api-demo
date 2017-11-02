@@ -1,0 +1,2 @@
+- This Application uses CryptoCompare api to enable users create cards that show exchange rates between cryptocurrencies and 20 major world currencies.
+- Users can also convert any amount they enter to a base currency.
